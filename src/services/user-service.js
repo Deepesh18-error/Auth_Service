@@ -41,6 +41,26 @@ class UserService{
         }
     }
 
+    async isAuthenticated(token){
+        try{
+            // step 1 -> verify the token
+            const isTokenVerified = this.verifyToken(token);
+
+            if(!isTokenVerified){
+                throw {error: "Token is not verified"};
+            }
+
+            const user = this.userRepository.getById(isTokenVerified.id);
+            if(!user){
+                throw {error: "User not found"};
+            }
+            return user.id;
+        } catch (error){
+            console.log("Somthing went wrong at repostiroy layer");
+            throw error;
+        }
+    }
+
     createToken(user){
         try{
             const result = jwt.sign(user , JWT_KEY , {expiresIn : '1d'});
@@ -62,6 +82,7 @@ class UserService{
             throw error;
         }
     }
+    
     
     checkPassword(userInputPlainPassword , encryptedPassword){
         try{
