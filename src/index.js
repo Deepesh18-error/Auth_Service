@@ -27,13 +27,13 @@ const prepareAndStartServer = () => {
             db.sequelize.sync({alter: true});
         }
 
-        const u1 = await User.findByPk(4);
-        const r1 = await Role.findByPk(2);
-        // u1.addRole(r1);
+        // const u1 = await User.findByPk(4);
+        // const r1 = await Role.findByPk(2);
+        // // u1.addRole(r1);
 
-        // const response = await u1.getRoles();
-        const response = await r1.getUsers();
-        console.log("response is : " , response);
+        // // const response = await u1.getRoles();
+        // const response = await r1.getUsers(); 
+        // console.log("response is : " , response);
 
         // const repo = new UserRepository();
         // const response = await repo.getById(1);
